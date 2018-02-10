@@ -1,0 +1,28 @@
+{
+  "name": "k8s_dns_training_grounds",
+  "version": "1.0.0",
+  "description": "Concept is easy. Create 3 services in nodejs, dockerize them, have them communicate with each other using DNS service.",
+  "main": "city-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndrwtrsk/k8s_dns_training_grounds.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ndrwtrsk/k8s_dns_training_grounds/issues"
+  },
+  "homepage": "https://github.com/ndrwtrsk/k8s_dns_training_grounds#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "minimist": "^1.2.0",
+    "superagent": "^3.8.2",
+    "superagent-promise": "^1.1.0"
+  }
+}

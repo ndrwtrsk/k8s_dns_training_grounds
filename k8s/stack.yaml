@@ -1,0 +1,163 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: amsterdam
+spec:
+  selector:
+    matchLabels:
+      city: amsterdam
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        city: amsterdam
+    spec:
+      containers:
+        - name: amsterdam
+          image: ndrw/city:1.0.0
+          args: ["amsterdam"]
+          ports:
+            - name: http
+              containerPort: 8082
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: amsterdam
+spec:
+  type: NodePort
+  selector:
+    city: amsterdam
+  ports:
+  - nodePort: 32002
+    port: 8082
+    targetPort: 8082
+    name: http
+    protocol: TCP
+
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: amsterdam
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /amsterdam
+        backend:
+          serviceName: amsterdam
+          servicePort: 8082
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: warsaw
+spec:
+  selector:
+    matchLabels:
+      city: warsaw
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        city: warsaw
+    spec:
+      containers:
+        - name: warsaw
+          image: ndrw/city:1.0.0
+          args: ["warsaw"]
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: warsaw
+spec:
+  type: NodePort
+  selector:
+    city: warsaw
+  ports:
+  - nodePort: 32000
+    port: 8080
+    targetPort: 8080
+    name: http
+    protocol: TCP
+
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: warsaw
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /warsaw
+        backend:
+          serviceName: warsaw
+          servicePort: 8080
+---
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: berlin
+spec:
+  selector:
+    matchLabels:
+      city: berlin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        city: berlin
+    spec:
+      containers:
+        - name: berlin
+          image: ndrw/city:1.0.0
+          args: ["berlin"]
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: berlin
+spec:
+  type: NodePort
+  selector:
+    city: berlin
+  ports:
+  - nodePort: 32001
+    port: 8081
+    targetPort: 8081
+    name: http
+    protocol: TCP
+
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: berlin
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /berlin
+        backend:
+          serviceName: berlin
+          servicePort: 8081
+---
+
